@@ -63,9 +63,6 @@
                 Object.assign(merged[code], primary[code] || {});
                 Object.assign(merged[code], remaining[code] || {});
             });
-            // Portuguese is the canonical source language. Any key that exists
-            // in another language is also a valid PT source string when no PT
-            // entry was explicitly provided.
             const allKeys = new Set(LANGS.flatMap(code => Object.keys(merged[code])));
             allKeys.forEach(key => { if (!(key in merged.pt)) merged.pt[key] = key; });
             dictionary = merged;
@@ -81,22 +78,31 @@
         if (!value || !dictionary) return value;
         const table = dictionary[targetLang] || {};
         const trimmed = value.trim();
-        if (table[trimmed]) {
-            const translated = table[trimmed];
-            return value.replace(trimmed, translated);
-        }
-        // Also translate embedded Portuguese phrases (useful for generated
-        // cards, labels and sentences that contain an icon or mixed markup).
+        if (table[trimmed]) return value.replace(trimmed, table[trimmed]);
         let result = value;
         const keys = Object.keys(table).filter(k => k && k.length > 2 && result.includes(k)).sort((a, b) => b.length - a.length);
         keys.forEach(key => { result = result.split(key).join(table[key]); });
         return result;
     }
 
+    // The legacy translations.js runs before this file on some pages. If it
+    // already translated the DOM, reverse that language back to Portuguese so
+    // we always keep one canonical source and can switch freely among languages.
+    function toPortuguese(value, currentLang) {
+        if (!value || currentLang === 'pt' || !dictionary) return value;
+        const table = dictionary[currentLang] || {};
+        let result = value;
+        const pairs = Object.keys(table)
+            .filter(key => key && table[key] && key !== table[key] && result.includes(table[key]))
+            .sort((a, b) => String(table[b]).length - String(table[a]).length);
+        pairs.forEach(key => { result = result.split(table[key]).join(key); });
+        return result;
+    }
+
     function setOriginal(target, key, value) {
         let map = originals.get(target);
         if (!map) { map = new Map(); originals.set(target, map); }
-        if (!map.has(key)) map.set(key, value);
+        if (!map.has(key)) map.set(key, toPortuguese(value, lang()));
         return map.get(key);
     }
 
@@ -112,14 +118,12 @@
         }
         if (node.nodeType !== Node.ELEMENT_NODE) return;
         if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName)) return;
-
         ATTRS.forEach(attr => {
             if (!node.hasAttribute(attr)) return;
             const source = setOriginal(node, `attr:${attr}`, node.getAttribute(attr) || '');
             const translated = translateValue(source, targetLang);
             if (node.getAttribute(attr) !== translated) node.setAttribute(attr, translated);
         });
-
         node.childNodes.forEach(child => applyToNode(child, targetLang));
     }
 
@@ -152,7 +156,7 @@
         const normalized = LANGS.includes(targetLang) ? targetLang : 'pt';
         localStorage.setItem(STORAGE_KEY, normalized);
         applyMetadata(normalized);
-        document.body && document.body.childNodes.forEach(node => applyToNode(node, normalized));
+        if (document.body) document.body.childNodes.forEach(node => applyToNode(node, normalized));
         updateButtons(normalized);
         applying = false;
         window.dispatchEvent(new CustomEvent('desktrad:i18n-applied', { detail: normalized }));
@@ -169,10 +173,9 @@
             }
             updateButtons(current);
         });
-        observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ATTRS });
+        if (document.body) observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ATTRS });
     }
 
-    // Delegation means buttons created by main.js are handled as well.
     document.addEventListener('click', event => {
         const button = event.target.closest && event.target.closest('.lang-btn');
         if (!button || !button.dataset.lang) return;
@@ -190,12 +193,8 @@
 
     (async () => {
         await loadDictionary();
-        // Capture the Portuguese DOM before the existing legacy translator or
-        // dynamically-generated sections can overwrite it.
         applyLanguage(lang());
         startObserver();
-        // main.js loads translations.js asynchronously; re-apply after it has
-        // had time to build shared header/footer content.
         [100, 350, 800, 1600].forEach(delay => setTimeout(() => applyLanguage(lang()), delay));
     })();
 })();
