@@ -1,17 +1,11 @@
-/* Desktrad — global four-language localization layer.
- * Loads the existing translation dictionary, then applies it to every
- * text node, relevant attribute, metadata field and dynamically-created node.
- */
+/* Desktrad — global four-language localization layer. */
 (() => {
     'use strict';
-
     const STORAGE_KEY = 'desktrad-lang';
     const LANGS = ['pt', 'en', 'es', 'zh'];
     const ATTRS = ['title', 'placeholder', 'aria-label', 'aria-placeholder', 'alt', 'data-answer', 'data-tooltip'];
     const originals = new WeakMap();
-    let dictionary = null;
-    let applying = false;
-    let observer = null;
+    let dictionary = null, applying = false, observer = null;
 
     const lang = () => {
         const value = localStorage.getItem(STORAGE_KEY) || 'pt';
@@ -29,22 +23,14 @@
             const c = source[i], n = source[i + 1];
             if (lineComment) { if (c === '\n') lineComment = false; continue; }
             if (blockComment) { if (c === '*' && n === '/') { blockComment = false; i++; } continue; }
-            if (quote) {
-                if (escaped) { escaped = false; continue; }
-                if (c === '\\') { escaped = true; continue; }
-                if (c === quote) quote = null;
-                continue;
-            }
+            if (quote) { if (escaped) { escaped = false; continue; } if (c === '\\') { escaped = true; continue; } if (c === quote) quote = null; continue; }
             if (c === '/' && n === '/') { lineComment = true; i++; continue; }
             if (c === '/' && n === '*') { blockComment = true; i++; continue; }
             if (c === '`') { template = !template; continue; }
             if (template) continue;
             if (c === '\"' || c === "'") { quote = c; continue; }
             if (c === '{') depth++;
-            if (c === '}') {
-                depth--;
-                if (depth === 0) return source.slice(brace, i + 1);
-            }
+            if (c === '}') { depth--; if (depth === 0) return source.slice(brace, i + 1); }
         }
         return null;
     }
@@ -59,18 +45,13 @@
             const primary = primaryLiteral ? Function(`"use strict"; return (${primaryLiteral});`)() : {};
             const remaining = remainingLiteral ? Function(`"use strict"; return (${remainingLiteral});`)() : {};
             const merged = { pt: {}, en: {}, es: {}, zh: {} };
-            LANGS.forEach(code => {
-                Object.assign(merged[code], primary[code] || {});
-                Object.assign(merged[code], remaining[code] || {});
-            });
+            LANGS.forEach(code => { Object.assign(merged[code], primary[code] || {}); Object.assign(merged[code], remaining[code] || {}); });
             const allKeys = new Set(LANGS.flatMap(code => Object.keys(merged[code])));
             allKeys.forEach(key => { if (!(key in merged.pt)) merged.pt[key] = key; });
             dictionary = merged;
-            return merged;
         } catch (error) {
             console.warn('[Desktrad i18n] Dictionary load failed:', error);
             dictionary = { pt: {}, en: {}, es: {}, zh: {} };
-            return dictionary;
         }
     }
 
@@ -80,22 +61,15 @@
         const trimmed = value.trim();
         if (table[trimmed]) return value.replace(trimmed, table[trimmed]);
         let result = value;
-        const keys = Object.keys(table).filter(k => k && k.length > 2 && result.includes(k)).sort((a, b) => b.length - a.length);
-        keys.forEach(key => { result = result.split(key).join(table[key]); });
+        Object.keys(table).filter(k => k && k.length > 2 && result.includes(k)).sort((a, b) => b.length - a.length).forEach(key => { result = result.split(key).join(table[key]); });
         return result;
     }
 
-    // The legacy translations.js runs before this file on some pages. If it
-    // already translated the DOM, reverse that language back to Portuguese so
-    // we always keep one canonical source and can switch freely among languages.
     function toPortuguese(value, currentLang) {
         if (!value || currentLang === 'pt' || !dictionary) return value;
         const table = dictionary[currentLang] || {};
         let result = value;
-        const pairs = Object.keys(table)
-            .filter(key => key && table[key] && key !== table[key] && result.includes(table[key]))
-            .sort((a, b) => String(table[b]).length - String(table[a]).length);
-        pairs.forEach(key => { result = result.split(table[key]).join(key); });
+        Object.keys(table).filter(key => key && table[key] && key !== table[key] && result.includes(table[key])).sort((a, b) => String(table[b]).length - String(table[a]).length).forEach(key => { result = result.split(table[key]).join(key); });
         return result;
     }
 
@@ -116,8 +90,7 @@
             if (node.nodeValue !== translated) node.nodeValue = translated;
             return;
         }
-        if (node.nodeType !== Node.ELEMENT_NODE) return;
-        if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName)) return;
+        if (node.nodeType !== Node.ELEMENT_NODE || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName)) return;
         ATTRS.forEach(attr => {
             if (!node.hasAttribute(attr)) return;
             const source = setOriginal(node, `attr:${attr}`, node.getAttribute(attr) || '');
@@ -135,16 +108,15 @@
             if (value == null) return;
             const source = setOriginal(el, key, value);
             const translated = translateValue(source, targetLang);
-            if (el.tagName === 'TITLE') el.textContent = translated;
-            else el.setAttribute('content', translated);
+            if (el.tagName === 'TITLE') el.textContent = translated; else el.setAttribute('content', translated);
         });
     }
 
     function updateButtons(targetLang) {
-        document.querySelectorAll('.lang-btn').forEach(button => {
+        document.querySelectorAll('.lang-btn, .lang-link').forEach(button => {
             const active = button.dataset.lang === targetLang;
             button.classList.toggle('active', active);
-            button.setAttribute('aria-pressed', String(active));
+            if (button.classList.contains('lang-btn')) button.setAttribute('aria-pressed', String(active));
         });
         const floating = document.querySelector('.floating-language span');
         if (floating) floating.textContent = targetLang === 'zh' ? '中文' : targetLang.toUpperCase();
@@ -177,8 +149,9 @@
     }
 
     document.addEventListener('click', event => {
-        const button = event.target.closest && event.target.closest('.lang-btn');
+        const button = event.target.closest && event.target.closest('.lang-btn, .lang-link');
         if (!button || !button.dataset.lang) return;
+        event.preventDefault();
         const targetLang = button.dataset.lang;
         localStorage.setItem(STORAGE_KEY, targetLang);
         if (dictionary) applyLanguage(targetLang);
