@@ -7,132 +7,37 @@
     <meta name="description" content="Conheça nossos serviços: tradução de documentos, juramentada, interpretação consecutiva e simultânea, legendagem, editoração e narração. Qualidade e precisão.">
     <meta name="keywords" content="serviços de tradução, tradução juramentada, interpretação simultânea, legendagem, narração, editoração">
     <link rel="canonical" href="https://www.desktrad.com/services.html">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.desktrad.com/services.html">
-    <meta property="og:title" content="Serviços | Desktrad Traduções">
-    <meta property="og:description" content="Tradução, interpretação, legendagem e muito mais.">
-    <meta property="og:image" content="https://www.desktrad.com/assets/og-services.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Serviços | Desktrad Traduções">
-    <meta name="twitter:description" content="Tradução, interpretação, legendagem e muito mais.">
+    <meta property="og:type" content="website"><meta property="og:url" content="https://www.desktrad.com/services.html">
+    <meta property="og:title" content="Serviços | Desktrad Traduções"><meta property="og:description" content="Tradução, interpretação, legendagem e muito mais.">
+    <meta property="og:image" content="https://www.desktrad.com/assets/og-services.jpg"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Serviços | Desktrad Traduções"><meta name="twitter:description" content="Tradução, interpretação, legendagem e muito mais.">
     <meta name="twitter:image" content="https://www.desktrad.com/assets/og-services.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/services-overrides.css">
 </head>
 <body>
-    <!-- Header active on Serviços -->
-    <header id="site-header"></header>
-    <div class="mobile-menu" id="mobileMenu"></div>
-    <div class="overlay" id="overlay"></div>
-
-    <nav class="breadcrumbs">
-        <div class="container"><ol><li><a href="index.html">Início</a></li><li>Serviços</li></ol></div>
-    </nav>
-
-    <main class="page-content">
-        <div class="container">
-            <h1 class="page-title">Nossos Serviços</h1>
-            <div class="services-grid">
-                <div class="service-card" id="documentos" data-aos="zoom-in">
-                    <div class="service-icon"><i class="fas fa-file-contract"></i></div>
-                    <h3>Tradução de Documentos</h3>
-                    <p>Com mais de trinta anos de experiência em tradução técnica, nossa equipe tem um sólido histórico de sucesso em setores como engenharia, tecnologia, medicina, marketing, e muitos outros.</p>
-                    <button class="service-modal-btn" data-modal="modal1">Saiba mais</button>
-                </div>
-                <div class="service-card" id="juramentada" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="service-icon"><i class="fas fa-gavel"></i></div>
-                    <h3>Tradução Juramentada</h3>
-                    <p>A tradução juramentada é essencial para contextos legais e oficiais, onde a precisão é crucial. Nossos tradutores são altamente confiáveis e garantem traduções exatas.</p>
-                    <button class="service-modal-btn" data-modal="modal2">Saiba mais</button>
-                </div>
-                <div class="service-card" id="interpretacao" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="service-icon"><i class="fas fa-headset"></i></div>
-                    <h3>Interpretação Consecutiva e Simultânea</h3>
-                    <p>Nossos intérpretes possuem muitos anos de experiência em interpretação consecutiva e simultânea, oferecendo serviços de alta qualidade em diversas áreas.</p>
-                    <button class="service-modal-btn" data-modal="modal3">Saiba mais</button>
-                </div>
-                <div class="service-card" id="legendagem" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="service-icon"><i class="fas fa-closed-captioning"></i></div>
-                    <h3>Legendagem de Vídeos</h3>
-                    <p>Realizamos legendagem de vídeos com precisão e alta qualidade em várias áreas técnicas. Nossa equipe adapta conteúdos para garantir clareza.</p>
-                    <button class="service-modal-btn" data-modal="modal4">Saiba mais</button>
-                </div>
-                <div class="service-card" id="editoracao" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="service-icon"><i class="fas fa-desktop"></i></div>
-                    <h3>Editoração</h3>
-                    <p>Oferecemos serviços de desktop publishing de alta qualidade com as melhores ferramentas do mercado. Ao contratar nossos serviços de tradução, você ganha a editoração como cortesia.</p>
-                    <button class="service-modal-btn" data-modal="modal5">Saiba mais</button>
-                </div>
-                <div class="service-card" id="narracao" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="service-icon"><i class="fas fa-microphone"></i></div>
-                    <h3>Narração</h3>
-                    <p>Oferecemos narração de vídeos com equipamentos avançados e narradores experientes, garantindo áudio de alta qualidade.</p>
-                    <button class="service-modal-btn" data-modal="modal6">Saiba mais</button>
-                </div>
-            </div>
-            <section class="service-journey">
-                <canvas id="hero-canvas" class="journey-canvas" aria-hidden="true"></canvas>
-                <div><span class="eyebrow">Do briefing à entrega</span><h2>Um fluxo claro para cada tipo de conteúdo.</h2><p>O formato muda conforme o projeto, mas a comunicação permanece simples: entender, produzir, revisar e entregar.</p></div>
-                <div class="journey-steps"><div><strong>01</strong><b>Briefing</b><span>Objetivo, idiomas, público e formato.</span></div><div><strong>02</strong><b>Produção</b><span>Tradução, adaptação ou interpretação especializada.</span></div><div><strong>03</strong><b>Conferência</b><span>Revisão de sentido, termos e apresentação.</span></div></div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Modals -->
-    <div class="modal" id="modal1">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Tradução de Documentos</h2>
-            <p>Nossa equipe de tradutores especializados oferece tradução de documentos técnicos, comerciais, financeiros e jurídicos com precisão e confidencialidade.</p>
-            <ul><li>Manuais técnicos</li><li>Contratos</li><li>Relatórios financeiros</li><li>Documentação de engenharia</li></ul>
-        </div>
-    </div>
-    <div class="modal" id="modal2">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Tradução Juramentada</h2>
-            <p>Traduções oficiais para documentos que precisam ser apresentados a órgãos públicos, instituições de ensino, empresas e processos internacionais.</p>
-            <ul><li>Certidões e documentos pessoais</li><li>Diplomas e históricos escolares</li><li>Contratos e procurações</li><li>Documentos para imigração</li></ul>
-        </div>
-    </div>
-    <div class="modal" id="modal3">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Interpretação Consecutiva e Simultânea</h2>
-            <p>Intérpretes preparados para reuniões, treinamentos, eventos e negociações, com preparação terminológica alinhada ao seu contexto.</p>
-            <ul><li>Reuniões executivas</li><li>Eventos e conferências</li><li>Treinamentos corporativos</li><li>Atendimento presencial ou remoto</li></ul>
-        </div>
-    </div>
-    <div class="modal" id="modal4">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Legendagem de Vídeos</h2>
-            <p>Adaptação e sincronização de conteúdo audiovisual para treinamento, comunicação corporativa, produtos e acessibilidade.</p>
-            <ul><li>Legendagem traduzida</li><li>Closed captions</li><li>Sincronização e revisão</li><li>Vídeos institucionais e técnicos</li></ul>
-        </div>
-    </div>
-    <div class="modal" id="modal5">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Editoração</h2>
-            <p>Preparação visual do arquivo traduzido para que tabelas, gráficos, imagens e hierarquia de informação acompanhem o material original.</p>
-            <ul><li>Manuais e apresentações</li><li>Diagramação de documentos</li><li>Recriação de tabelas e gráficos</li><li>Entrega pronta para publicação</li></ul>
-        </div>
-    </div>
-    <div class="modal" id="modal6">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Narração</h2>
-            <p>Produção de voz para vídeos, treinamentos e apresentações, com roteiro adaptado e direção compatível com o público e o objetivo.</p>
-            <ul><li>Narração institucional</li><li>Treinamentos e e-learning</li><li>Vozes em diferentes idiomas</li><li>Áudio revisado e pronto para edição</li></ul>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer></footer>
-    <script src="css/js/main.js"></script>
-    <script src="css/js/canvas-animations.js"></script>
-    <script src="css/js/translations.js"></script>
-</body>
-</html>
+<header id="site-header"></header><div class="mobile-menu" id="mobileMenu"></div><div class="overlay" id="overlay"></div>
+<nav class="breadcrumbs"><div class="container"><ol><li><a href="index.html">Início</a></li><li>Serviços</li></ol></div></nav>
+<main class="page-content"><div class="container">
+<h1 class="page-title">Nossos Serviços</h1>
+<div class="services-grid">
+<div class="service-card" id="documentos" data-aos="zoom-in"><div class="service-icon"><i class="fas fa-file-contract"></i></div><h3>Tradução de Documentos</h3><p>Com mais de trinta anos de experiência em tradução técnica, nossa equipe tem um sólido histórico de sucesso em setores como engenharia, tecnologia, medicina, marketing, e muitos outros.</p><button class="service-modal-btn" data-modal="modal1">Saiba mais</button></div>
+<div class="service-card" id="juramentada" data-aos="zoom-in" data-aos-delay="100"><div class="service-icon"><i class="fas fa-gavel"></i></div><h3>Tradução Juramentada</h3><p>A tradução juramentada é essencial para contextos legais e oficiais, onde a precisão é crucial. Nossos tradutores são altamente confiáveis e garantem traduções exatas.</p><button class="service-modal-btn" data-modal="modal2">Saiba mais</button></div>
+<div class="service-card" id="interpretacao" data-aos="zoom-in" data-aos-delay="200"><div class="service-icon"><i class="fas fa-headset"></i></div><h3>Interpretação Consecutiva e Simultânea</h3><p>Nossos intérpretes possuem muitos anos de experiência em interpretação consecutiva e simultânea, oferecendo serviços de alta qualidade em diversas áreas.</p><button class="service-modal-btn" data-modal="modal3">Saiba mais</button></div>
+<div class="service-card" id="legendagem" data-aos="zoom-in" data-aos-delay="300"><div class="service-icon"><i class="fas fa-closed-captioning"></i></div><h3>Legendagem de Vídeos</h3><p>Realizamos legendagem de vídeos com precisão e alta qualidade em várias áreas técnicas. Nossa equipe adapta conteúdos para garantir clareza.</p><button class="service-modal-btn" data-modal="modal4">Saiba mais</button></div>
+<div class="service-card" id="editoracao" data-aos="zoom-in" data-aos-delay="400"><div class="service-icon"><i class="fas fa-desktop"></i></div><h3>Editoração</h3><p>Oferecemos serviços de desktop publishing de alta qualidade com as melhores ferramentas do mercado. Ao contratar nossos serviços de tradução, você ganha a editoração como cortesia.</p><button class="service-modal-btn" data-modal="modal5">Saiba mais</button></div>
+<div class="service-card" id="narracao" data-aos="zoom-in" data-aos-delay="500"><div class="service-icon"><i class="fas fa-microphone"></i></div><h3>Narração</h3><p>Oferecemos narração de vídeos com equipamentos avançados e narradores experientes, garantindo áudio de alta qualidade.</p><button class="service-modal-btn" data-modal="modal6">Saiba mais</button></div>
+</div>
+<section class="service-journey"><canvas id="hero-canvas" class="journey-canvas" aria-hidden="true"></canvas><div><span class="eyebrow">Do briefing à entrega</span><h2>Um fluxo claro para cada tipo de conteúdo.</h2><p>O formato muda conforme o projeto, mas a comunicação permanece simples: entender, produzir, revisar e entregar.</p></div><div class="journey-steps"><div><strong>01</strong><b>Briefing</b><span>Objetivo, idiomas, público e formato.</span></div><div><strong>02</strong><b>Produção</b><span>Tradução, adaptação ou interpretação especializada.</span></div><div><strong>03</strong><b>Conferência</b><span>Revisão de sentido, termos e apresentação.</span></div></div></section>
+</div></main>
+<div class="modal" id="modal1"><div class="modal-content"><span class="modal-close">&times;</span><h2>Tradução de Documentos</h2><p>Nossa equipe de tradutores especializados oferece tradução de documentos técnicos, comerciais, financeiros e jurídicos com precisão e confidencialidade.</p><ul><li>Manuais técnicos</li><li>Contratos</li><li>Relatórios financeiros</li><li>Documentação de engenharia</li></ul></div></div>
+<div class="modal" id="modal2"><div class="modal-content"><span class="modal-close">&times;</span><h2>Tradução Juramentada</h2><p>Traduções oficiais para documentos que precisam ser apresentados a órgãos públicos, instituições de ensino, empresas e processos internacionais.</p><ul><li>Certidões e documentos pessoais</li><li>Diplomas e históricos escolares</li><li>Contratos e procurações</li><li>Documentos para imigração</li></ul></div></div>
+<div class="modal" id="modal3"><div class="modal-content"><span class="modal-close">&times;</span><h2>Interpretação Consecutiva e Simultânea</h2><p>Intérpretes preparados para reuniões, treinamentos, eventos e negociações, com preparação terminológica alinhada ao seu contexto.</p><ul><li>Reuniões executivas</li><li>Eventos e conferências</li><li>Treinamentos corporativos</li><li>Atendimento presencial ou remoto</li></ul></div></div>
+<div class="modal" id="modal4"><div class="modal-content"><span class="modal-close">&times;</span><h2>Legendagem de Vídeos</h2><p>Adaptação e sincronização de conteúdo audiovisual para treinamento, comunicação corporativa, produtos e acessibilidade.</p><ul><li>Legendagem traduzida</li><li>Closed captions</li><li>Sincronização e revisão</li><li>Vídeos institucionais e técnicos</li></ul></div></div>
+<div class="modal" id="modal5"><div class="modal-content"><span class="modal-close">&times;</span><h2>Editoração</h2><p>Preparação visual do arquivo traduzido para que tabelas, gráficos, imagens e hierarquia de informação acompanhem o material original.</p><ul><li>Manuais e apresentações</li><li>Diagramação de documentos</li><li>Recriação de tabelas e gráficos</li><li>Entrega pronta para publicação</li></ul></div></div>
+<div class="modal" id="modal6"><div class="modal-content"><span class="modal-close">&times;</span><h2>Narração</h2><p>Produção de voz para vídeos, treinamentos e apresentações, com roteiro adaptado e direção compatível com o público e o objetivo.</p><ul><li>Narração institucional</li><li>Treinamentos e e-learning</li><li>Vozes em diferentes idiomas</li><li>Áudio revisado e pronto para edição</li></ul></div></div>
+<footer></footer>
+<script src="css/js/main.js"></script><script src="css/js/canvas-animations.js"></script><script src="css/js/translations.js"></script><script src="css/js/services-translations.js"></script>
+</body></html>
