@@ -1,0 +1,30 @@
+/* Specialty detail pages */
+.specialty-detail-page{padding:38px 0 100px}
+.specialty-detail-hero{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);gap:56px;align-items:center;padding:28px 0 58px;border-bottom:1px solid var(--line,#ded0e8)}
+.specialty-detail-hero>div:first-child{max-width:720px}
+.specialty-detail-hero .eyebrow,.specialty-detail-content .eyebrow,.detail-flow .eyebrow{display:block;color:var(--primary,#8d35d6);font:700 .66rem 'Orbitron',sans-serif;letter-spacing:1.3px;text-transform:uppercase}
+.specialty-detail-hero h1{margin:14px 0 18px;color:var(--primary-dark,#170528);font-size:clamp(2rem,4.5vw,3.7rem);line-height:1.05;letter-spacing:-.5px}
+.specialty-detail-hero p{max-width:680px;color:#63536c;font-size:1.02rem;line-height:1.8}
+.specialty-detail-hero .cta-button{display:inline-flex;margin-top:28px}
+.specialty-image-frame{position:relative;min-height:420px;overflow:hidden;border:1px solid rgba(141,53,214,.28);background:#170528;box-shadow:0 22px 55px rgba(51,0,92,.18)}
+.specialty-image-frame img{display:block;width:100%;height:420px;object-fit:cover;filter:saturate(.8) contrast(1.05)}
+.specialty-image-frame::after{content:'';position:absolute;inset:12px;border:1px solid rgba(0,234,255,.5);pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,60,172,.14)}
+.detail-signal{position:absolute;left:18px;bottom:18px;z-index:2;padding:9px 12px;color:#fff;background:rgba(23,5,40,.9);border:1px solid rgba(0,234,255,.65);font:700 .6rem 'Orbitron',sans-serif;letter-spacing:1px}
+.detail-signal i{margin:0 8px;color:var(--accent,#00eaff)}
+.specialty-detail-content{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:55px;padding:58px 0;border-bottom:1px solid var(--line,#ded0e8)}
+.specialty-detail-content h2{margin:12px 0 16px;color:var(--primary-dark,#170528);font-size:clamp(1.55rem,3vw,2.25rem);line-height:1.12}
+.specialty-detail-content p{color:#63536c;line-height:1.8;font-size:.95rem}
+.detail-checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.detail-checks>div{display:flex;flex-direction:column;min-height:180px;padding:20px;border:1px solid rgba(141,53,214,.2);background:rgba(255,255,255,.58);box-shadow:0 10px 25px rgba(51,0,92,.05)}
+.detail-checks i{margin-bottom:22px;color:var(--secondary,#ff3cac);font-size:1.15rem}
+.detail-checks b{margin-bottom:8px;color:var(--primary-dark,#170528);font:700 .75rem 'Orbitron',sans-serif;letter-spacing:.7px;text-transform:uppercase}
+.detail-checks span{color:#685971;font-size:.8rem;line-height:1.6}
+.detail-flow{margin-top:56px;padding:34px;background:linear-gradient(135deg,#170528,#430c68);border:1px solid rgba(200,121,255,.35);box-shadow:0 20px 45px rgba(51,0,92,.16)}
+.detail-flow .eyebrow{color:var(--accent,#00eaff)}
+.detail-flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.detail-flow-grid>div{position:relative;min-height:125px;padding:18px;border:1px solid rgba(200,121,255,.25);background:rgba(11,2,22,.42)}
+.detail-flow-grid strong{display:block;margin-bottom:18px;color:var(--secondary,#ff3cac);font:700 1.25rem 'Orbitron',sans-serif}
+.detail-flow-grid b{display:block;margin-bottom:7px;color:#fff;font:700 .78rem 'Orbitron',sans-serif;text-transform:uppercase;letter-spacing:.7px}
+.detail-flow-grid span{display:block;color:#cfb9df;font-size:.8rem;line-height:1.55}
+@media(max-width:900px){.specialty-detail-hero{grid-template-columns:1fr;gap:30px}.specialty-image-frame{min-height:330px}.specialty-image-frame img{height:330px}.specialty-detail-content{grid-template-columns:1fr;gap:30px}.detail-checks{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.specialty-detail-page{padding-top:20px}.specialty-detail-hero{padding-bottom:38px}.specialty-detail-hero h1{font-size:clamp(1.8rem,10vw,2.7rem)}.specialty-detail-hero p{font-size:.92rem}.specialty-image-frame,.specialty-image-frame img{min-height:270px;height:270px}.detail-checks{grid-template-columns:1fr}.detail-checks>div{min-height:0}.detail-flow{margin-top:38px;padding:24px 18px}.detail-flow-grid{grid-template-columns:1fr}.detail-flow-grid>div{min-height:105px}.detail-signal{left:12px;bottom:12px;font-size:.52rem}}
