@@ -36,9 +36,12 @@
     };
 
     let originals = null;
+    let observer = null;
+    let applying = false;
 
     function getElements() {
         return {
+            hero: document.querySelector('.hero-home'),
             badge: document.querySelector('.hero-home .hero-badge'),
             title: document.querySelector('.hero-home .hero-content > h1'),
             description: document.querySelector('.hero-home .hero-content > p'),
@@ -47,7 +50,7 @@
     }
 
     function capture() {
-        if (originals) return;
+        if (originals) return true;
         const el = getElements();
         if (!el.badge || !el.title || !el.description || el.buttons.length < 2) return false;
 
@@ -62,21 +65,41 @@
     }
 
     function apply(lang) {
-        if (!capture()) return;
+        if (applying || !capture()) return;
         lang = LANGS.includes(lang) ? lang : 'pt';
         const el = getElements();
         const t = content[lang];
+        applying = true;
+        if (observer) observer.disconnect();
 
         el.badge.innerHTML = t.badge;
         el.title.innerHTML = t.title;
         el.description.textContent = t.description;
         el.buttons[0].textContent = t.services;
         el.buttons[1].textContent = t.contact;
+
+        applying = false;
+        if (el.hero && observer) observer.observe(el.hero, { childList: true, subtree: true, characterData: true });
+    }
+
+    function installObserver() {
+        const el = getElements();
+        if (!el.hero || observer) return;
+        observer = new MutationObserver(() => {
+            if (applying) return;
+            const lang = LANGS.includes(localStorage.getItem(KEY)) ? localStorage.getItem(KEY) : 'pt';
+            apply(lang);
+        });
+        observer.observe(el.hero, { childList: true, subtree: true, characterData: true });
     }
 
     function boot() {
-        if (!capture()) return;
+        if (!capture()) {
+            setTimeout(boot, 50);
+            return;
+        }
 
+        installObserver();
         apply(localStorage.getItem(KEY) || 'pt');
 
         window.addEventListener('desktrad:language', event => {
